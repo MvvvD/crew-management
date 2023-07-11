@@ -4,6 +4,9 @@ package com.dmochowski.crewmanagement.entity;
 public class CurrentTask {
     String currentTask;
 
+    public CurrentTask() {
+    }
+
     public CurrentTask(String currentTask) {
         this.currentTask = currentTask;
     }
@@ -12,4 +15,7 @@ public class CurrentTask {
         return currentTask;
     }
 
+    public void setCurrentTask(String currentTask) {
+        this.currentTask = currentTask;
+    }
 }

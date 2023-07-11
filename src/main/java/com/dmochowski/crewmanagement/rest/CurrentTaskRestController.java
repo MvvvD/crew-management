@@ -3,6 +3,7 @@ package com.dmochowski.crewmanagement.rest;
 import com.dmochowski.crewmanagement.Service.EmployeeService;
 import com.dmochowski.crewmanagement.entity.Employee;
 import com.dmochowski.crewmanagement.entity.CurrentTask;
+import org.springframework.scheduling.config.Task;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,8 +15,8 @@ public class CurrentTaskRestController {
         this.employeeService = employeeService;
     }
     @GetMapping("/{id}")
-    public String getTask(@PathVariable int id){
-        return employeeService.findById(id).getTask();
+    public CurrentTask getTask(@PathVariable int id){
+        return new CurrentTask(employeeService.findById(id).getTask());
     }
 
     // allows for simple {"task":"task content"} json instead of whole employee request
