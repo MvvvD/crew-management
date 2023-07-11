@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "employee")
 public class Employee {
+    //for readability
+    //int id, String firstName, lastName, role, phoneNumber, hiredSince, phoneNumber, task
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +23,7 @@ public class Employee {
     private String role;
 
     @Column(name = "hired_from")
-    private String hiredFrom;
+    private String hiredSince;
 
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -64,12 +66,12 @@ public class Employee {
         this.role = role;
     }
 
-    public String getHiredFrom() {
-        return hiredFrom;
+    public String getHiredSince() {
+        return hiredSince;
     }
 
-    public void setHiredFrom(String hiredFrom) {
-        this.hiredFrom = hiredFrom;
+    public void setHiredSince(String hiredFrom) {
+        this.hiredSince = hiredFrom;
     }
 
     public String getPhoneNumber() {
@@ -95,7 +97,7 @@ public class Employee {
                 ", firstName = '" + firstName + '\'' +
                 ", lastName = '" + lastName + '\'' +
                 ", role = '" + role + '\'' +
-                ", working since = '" + hiredFrom + '\'' +
+                ", working since = '" + hiredSince + '\'' +
                 ", contact = '" + phoneNumber + '\'' +
                 ", current task = '" + task + '\'' +
                 '}';
