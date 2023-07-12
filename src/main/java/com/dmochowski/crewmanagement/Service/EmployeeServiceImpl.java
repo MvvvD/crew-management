@@ -84,12 +84,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> findAvailableEmployees() {
-        return employeeRepo.findAvailableEmployees();
+    public List<Employee> findByTaskNull() {
+        return employeeRepo.findByTaskIsNull();
     }
 
     @Override
     public List<EmployeeGdpr> findAvailableEmployeesGdpr() {
-        return EmployeesToEmployeesGdpr(employeeRepo.findAvailableEmployees());
+        return EmployeesToEmployeesGdpr(employeeRepo.findByTaskIsNull());
     }
 }

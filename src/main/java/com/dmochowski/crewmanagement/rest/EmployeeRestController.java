@@ -54,7 +54,7 @@ public class EmployeeRestController {
 
     @GetMapping("/available")
     public List<Employee> getAvailable(){
-        return employeeService.findAvailableEmployees();
+        return employeeService.findByTaskNull();
     }
 
     @DeleteMapping("/{id}")

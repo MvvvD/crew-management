@@ -13,7 +13,7 @@ public interface EmployeeService {
     Employee save(Employee employee);
     List<Employee> findByRole(String role);
     List<EmployeeGdpr> findByRoleGdpr(String role);
-    List<Employee> findAvailableEmployees();
+    List<Employee> findByTaskNull();
     List<EmployeeGdpr> findAvailableEmployeesGdpr();
     void deleteById(int id);
 
