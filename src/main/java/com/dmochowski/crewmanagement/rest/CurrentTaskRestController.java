@@ -27,7 +27,8 @@ public class CurrentTaskRestController {
          return employeeService.save(employee);
     }
 
-    //this might be connected to a button or something, so employee can finish its task w/o body in request
+    //this might be connected to a button or something, so supervisor can finish its task w/o body in request
+    //sets task to null, so /available request gonna work properly
     @PutMapping("/{id}/finished")
     public Employee finishTask(@PathVariable int id){
         Employee employee = employeeService.findById(id);

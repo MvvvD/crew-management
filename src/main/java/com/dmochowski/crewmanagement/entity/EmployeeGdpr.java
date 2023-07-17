@@ -4,7 +4,7 @@ public class EmployeeGdpr {
     //basically an employee class without sensitive/GDPR protected data,
     // might be a feature for a client "oversight" or something, only gets Get HTTP methods and getters,
     // employeesGDPR are created from employees on server side, never exposing sensitive data to the client.
-    //
+
     private final String name, role, task;
 
     public EmployeeGdpr(Employee employee) {
