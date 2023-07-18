@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-    private EmployeeRepo employeeRepo;
+    private final EmployeeRepo employeeRepo;
 
     @Autowired
     public EmployeeServiceImpl(EmployeeRepo employeeRepo) {
@@ -41,7 +41,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee findById(int id) {
 
         Optional<Employee> request = employeeRepo.findById(id);
-        Employee employee = null;
+        Employee employee;
         if (request.isPresent()) {
             employee = request.get();
         } else {
@@ -53,7 +53,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeGdpr findByIdGdpr(int id) {
         Optional<Employee> request = employeeRepo.findById(id);
-        EmployeeGdpr employee = null;
+        EmployeeGdpr employee;
         if (request.isPresent()) {
             employee = new EmployeeGdpr(request.get());
         } else {
@@ -68,8 +68,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void deleteById(int id) {
-        employeeRepo.deleteById(id);
+    public void delete(Employee employee) {
+        employeeRepo.delete(employee);
     }
 
     @Override
@@ -86,6 +86,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<Employee> findByTaskNull() {
         return employeeRepo.findByTaskIsNull();
+    }
+
+    @Override
+    public List<Employee> findByTaskNotNull() {
+        return employeeRepo.findByTaskIsNotNull();
     }
 
     @Override

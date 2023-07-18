@@ -2,8 +2,10 @@ package com.dmochowski.crewmanagement.entity;
 
 import jakarta.persistence.*;
 
+import java.sql.Timestamp;
+
 @Entity
-@Table(name = "employee")
+@Table(name = "employees")
 public class Employee {
     //for readability
     //int id, String firstName, lastName, role, phoneNumber, hiredSince, phoneNumber, task
@@ -22,14 +24,17 @@ public class Employee {
     @Column(name = "role")
     private String role;
 
-    @Column(name = "hired_from")
+    @Column(name = "hired_since")
     private String hiredSince;
 
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "task")
+    @Column(name = "current_task")
     private String task;
+
+    @Column(name = "task_timestamp")
+    private java.sql.Timestamp taskTimestamp;
 
     public Employee() {
     }
@@ -90,6 +95,16 @@ public class Employee {
         this.task = task;
     }
 
+    public Timestamp getTaskTimestamp() {
+        return taskTimestamp;
+    }
+
+    public void setTaskTimestamp(Timestamp taskTimestamp) {
+        this.taskTimestamp = taskTimestamp;
+    }
+
+
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -100,6 +115,7 @@ public class Employee {
                 ", working since = '" + hiredSince + '\'' +
                 ", contact = '" + phoneNumber + '\'' +
                 ", current task = '" + task + '\'' +
+                ", since = '" + taskTimestamp + '\'' +
                 '}';
     }
 }

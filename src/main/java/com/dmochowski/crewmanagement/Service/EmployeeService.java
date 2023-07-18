@@ -14,8 +14,8 @@ public interface EmployeeService {
     List<Employee> findByRole(String role);
     List<EmployeeGdpr> findByRoleGdpr(String role);
     List<Employee> findByTaskNull();
+    List<Employee> findByTaskNotNull();
     List<EmployeeGdpr> findAvailableEmployeesGdpr();
-    void deleteById(int id);
+    void delete(Employee employee);
 
 }
-// TODO: 12/07/2023 security config with admin, hr, leader, worker, client roles

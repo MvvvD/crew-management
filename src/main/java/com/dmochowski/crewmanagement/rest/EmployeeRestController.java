@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/employees")
 public class EmployeeRestController {
 
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
 
     public EmployeeRestController(EmployeeService employeeService) {
         this.employeeService = employeeService;
@@ -30,7 +30,6 @@ public class EmployeeRestController {
         Employee employee = employeeService.findById(id);
         if(employee==null){
             throw new RuntimeException("no employee " +id+" found");
-
         }
         return employee;
     }
@@ -56,14 +55,16 @@ public class EmployeeRestController {
     public List<Employee> getAvailable(){
         return employeeService.findByTaskNull();
     }
+    @GetMapping("/busy")
+    public List<Employee> getBusy(){
+        return employeeService.findByTaskNotNull();
+    }
 
-    @DeleteMapping("/{id}")
-    public String deleteEmployee(@PathVariable int id){
-        Employee employee = employeeService.findById(id);
-        if(employee==null){
-          throw new RuntimeException("no employee found");
-        }
-        employeeService.deleteById(id);
-        return "deleted employee id: " + id;
+    @DeleteMapping()
+    public Employee deleteEmployee(@RequestBody Employee employee){
+
+
+        employeeService.delete(employee);
+        return employee;
     }
 }

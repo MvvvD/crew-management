@@ -29,8 +29,8 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/employees/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/employees/**").hasAnyRole("ADMIN","MANAGER")
                 .requestMatchers(HttpMethod.DELETE, "/employees/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/task/**").hasAnyRole("ADMIN","MANAGER","SUPERVISOR","WORKER")
-                .requestMatchers(HttpMethod.PUT, "/task/**").hasAnyRole("ADMIN","MANAGER, SUPERVISOR")
+                .requestMatchers(HttpMethod.GET, "/tasks/**").hasAnyRole("ADMIN","MANAGER","SUPERVISOR","WORKER")
+                .requestMatchers(HttpMethod.PUT, "/tasks/**").hasAnyRole("ADMIN","MANAGER, SUPERVISOR")
                 .requestMatchers(HttpMethod.GET, "/employeesgdpr/**").permitAll());
         httpSecurity.httpBasic(Customizer.withDefaults());
         httpSecurity.csrf(AbstractHttpConfigurer::disable);

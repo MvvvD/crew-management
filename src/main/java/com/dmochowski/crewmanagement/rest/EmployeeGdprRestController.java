@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/employeesgdpr")
 public class EmployeeGdprRestController {
 
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
 
     public EmployeeGdprRestController(EmployeeService employeeService) {
         this.employeeService = employeeService;
