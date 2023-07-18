@@ -1,13 +1,12 @@
 # crew-management WORK IN PROGRESS 
-First non-tutorial project in Spring. Whole project was done by myself, without any guidance/overview 
+First non-tutorial project in Spring. Project was done by myself, without any guidance/overview 
 
-Back-end for a crew management app  
-that allows for (depending on role/permissions):  
-CRUD operation on employee,
-reading GDPR-safe employee data without any authentication
-reading, updating and "marking as done" on employee tasks  
-getting employees list, possible filtering by role/working status   
-tasks tracking and automatic archiving of finished tasks
+Back-end for a crew management app that allows for (depending on role/permissions):  
+* CRUD operation on employee
+* reading GDPR-safe employee data without any authentication
+* reading, updating and "marking as done" on employee tasks  
+* getting employees list, possible filtering by role/working status   
+* tasks tracking and automatic archiving of finished tasks
 
 Stack:
 * Java 18
@@ -73,11 +72,11 @@ Endpoints:
  
     
 * /employees/{id}
-    * GET → return employee with given id if exist, roles: all
+    * GET → return employee with given id if exists, roles: all
 
 
 * /employees/roles/{role}
-  * GET → return list of employees with given role if exist, roles: all
+  * GET → return list of employees with given role if exists, roles: all
 
 
 * /employees/available
@@ -97,7 +96,7 @@ Endpoints:
 
   
 * /employeesgdpr/available
-  * GET → return list of employeesgdpr without task, no authentication required
+  * GET → return a list of employeesgdpr without task, no authentication required
 
 
 * /tasks/{id}
