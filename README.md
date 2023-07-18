@@ -1,25 +1,32 @@
-# crew-management WORK IN PROGRESS 
-First non-tutorial project in Spring. Project was done by myself, without any guidance/overview 
+# crew-management 
 
-Back-end for a crew management app that allows for (depending on role/permissions):  
+_WORK IN PROGRESS_ 
+
+
+First project in Spring boot. Project was done by myself, without any guidance nor was copy-pasted from a tutorial. Problems were solved with help of already existing stack overflow questions or official java/spring boot/mysql documentation
+
+**Back-end/API** for a crew management app that allows for (depending on role/permissions):  
 * CRUD operation on employee
 * reading GDPR-safe employee data without any authentication
 * reading, updating and "marking as done" on employee tasks  
 * getting employees list, possible filtering by role/working status   
 * tasks tracking and automatic archiving of finished tasks
 
-Stack:
+## Stack/Tools:
 * Java 18
 * Spring Boot 3
 * MySQL
 * Maven
 
-Tools:
+  
 * IntelliJ idea
 * Postman
 * MySQL workbench
 
-Entities:
+## Entities:
+
+Data is formatted in JSON. SQL types in bracket for corresponding field in database.
+
 * employee  
     {  
   "id" : "id", (INT)  
@@ -57,13 +64,20 @@ Entities:
 "currentTask" : "taskContent", (VARCHAR(800))  
 }
 
-Roles:
+Employeegdpr and task are **read-only** entities. Employeegdpr is basically employee entity stripped from sensitive data. Current_task is workaround for updating an employee with new task using request body that is as small as possible, simplifying said body to single field.
+
+Employee **doesn't** have separate "task load status" field. Available Employee has currentTask set to **null**. This can be achieved using /tasks/{id}/finished endpoint with HTTP PUT method. This endpoint doesn't require body, so it can be wired, for example, to a button. Setting task to an empty string **won't** change status to available. **Employee with empty string as a task will be treated as busy.**
+
+
+## Roles:
 * ADMIN 
 * MANAGER
 * SUPERVISOR
 * WORKER
 
-Endpoints:
+**ADMIN** has all permissions, **MANAGER** can update employees and has Supervisor/Worker permissions. **SUPERVISOR** can update and "mark as done" tasks plus has Worker permissions. **WORKER** can get list of employees (and filter it by role/task load), get employee by id, check current and past tasks.
+
+## REST endpoints:
 * /employees  
   * GET → return list of employees, roles: all
   * POST → updates employees, roles: ADMIN, MANAGER, requires employee (without id) in body 
@@ -105,7 +119,7 @@ Endpoints:
 
 
 * /tasks/{id}/finished
-    * PUT → updates currentTask of the employee with given id to null, functionally marks task as done (moves employee from busy to available, adds finished task to task archive), roles: ADMIN, MANAGER, SUPERVISOR", requires current_task in body
+    * PUT → updates currentTask of the employee with given id to null, functionally marks task as done (moves employee from busy to available, adds finished task to task archive), roles: ADMIN, MANAGER, SUPERVISOR
 
 
 * /tasks/repository
