@@ -12,7 +12,7 @@ import org.springframework.http.HttpMethod;
 
 import javax.sql.DataSource;
 
-// test password bcrypt $2a$12$BdcqUNTdAOp8fp0TQ8fC8u6QV4KoGiHG6FjL/ixijBz1XYPS6qAtG
+// test password bcrypt $2a$12$fjk1czJ5ErVlHiDG2WY8MefccPxVaRcq7HU1aLm9hctlWCm4S6K.2
 @Configuration
 public class SecurityConfig {
 

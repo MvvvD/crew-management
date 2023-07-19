@@ -2,6 +2,7 @@ package com.dmochowski.crewmanagement.entity;
 
 import jakarta.persistence.*;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
@@ -25,7 +26,7 @@ public class Employee {
     private String role;
 
     @Column(name = "hired_since")
-    private String hiredSince;
+    private java.sql.Date hiredSince;
 
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -71,12 +72,12 @@ public class Employee {
         this.role = role;
     }
 
-    public String getHiredSince() {
+    public Date getHiredSince() {
         return hiredSince;
     }
 
-    public void setHiredSince(String hiredFrom) {
-        this.hiredSince = hiredFrom;
+    public void setHiredSince(Date hiredSince) {
+        this.hiredSince = hiredSince;
     }
 
     public String getPhoneNumber() {

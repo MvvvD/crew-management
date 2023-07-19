@@ -27,8 +27,9 @@ First project in Spring boot. Project was done by myself, without any guidance n
 
 Data is formatted in JSON. SQL types in bracket for corresponding field in database.
 
-* employee  
-    {  
+### employee  
+    
+{  
   "id" : "id", (INT)  
   "firstName" : "firstName", (VARCHAR(40))  
   "lastName" : "lastName", (VARCHAR(40))  
@@ -38,35 +39,41 @@ Data is formatted in JSON. SQL types in bracket for corresponding field in datab
   "task" : "currentTask", (VARCHAR(800))  
   "taskTimestamp" : "taskTimestamp", (DATETIME)  
 }
+  
+
+  Employee **doesn't** have separate a "task load status" field. Available Employee has currentTask set to **null**. This can be achieved using /tasks/{id}/finished endpoint with HTTP PUT method. This endpoint doesn't require body, so it can be used, for example, with a button. Setting task to an empty string **won't** change status to available. **Employee with empty string as a task will be treated as busy.**
 
 
-* employeegdpr  
-  {  
+### employeegdpr  
+  
+{  
   "id" : "id", (INT)  
   "firstName" : "firstName", (VARCHAR(40))  
   "role" : "role", (VARCHAR(40))  
   "task" : "currentTask", (VARCHAR(800))  
   }
 
+Employeegdpr is employee entity stripped from sensitive data.
 
-* task  
-  {  
+### task
+{  
   "id" : "id", (INT)  
   "taskDesc" : "description", (VARCHAR(800))  
   "employeeId" : "employeeId", (INT)  
   "taskTimestamp" : "startTimestamp", (DATETIME)  
   "finishTimestamp" : "finishTimestamp", (DATETIME)  
-  }
+  }  
 
+Employeegdpr and task are **read-only** entities. Task only occur in tasks repository/archive as entry of a list.
 
-* current_task  
+### current_task  
   {  
 "currentTask" : "taskContent", (VARCHAR(800))  
 }
 
-Employeegdpr and task are **read-only** entities. Employeegdpr is basically employee entity stripped from sensitive data. Current_task is workaround for updating an employee with new task using request body that is as small as possible, simplifying said body to single field.
+Current_task is workaround for **updating an employee with new task using request body** that is as small as possible, simplifying said body to single field.
 
-Employee **doesn't** have separate "task load status" field. Available Employee has currentTask set to **null**. This can be achieved using /tasks/{id}/finished endpoint with HTTP PUT method. This endpoint doesn't require body, so it can be wired, for example, to a button. Setting task to an empty string **won't** change status to available. **Employee with empty string as a task will be treated as busy.**
+
 
 
 ## Roles:
@@ -128,3 +135,113 @@ Employee **doesn't** have separate "task load status" field. Available Employee 
 
 * /tasks/repository/{id}
     * GET → return list of tasks finished by the employee with given id, roles: all
+
+## Examples
+
+### Employee
+
+```json
+{
+        "id": 1,
+        "firstName": "tom",
+        "lastName": "webber",
+        "role": "electrician",
+        "hiredSince": "2023-07-19",
+        "phoneNumber": "+48 822-461-828",
+        "task": "wire outlets on 2nd floor",
+        "taskTimestamp": "2023-07-19T02:45:02.000+00:00"
+    }
+```
+
+### Employees list
+
+```json
+[
+    {
+        "id": 1,
+        "firstName": "tom",
+        "lastName": "webber",
+        "role": "electrician",
+        "hiredSince": "2023-07-19",
+        "phoneNumber": "+48 822-461-828",
+        "task": "wire outlets on 2nd floor",
+        "taskTimestamp": "2023-07-19T02:45:02.000+00:00"
+    },
+    {
+        "id": 2,
+        "firstName": "mark",
+        "lastName": "waltz",
+        "role": "welder",
+        "hiredSince": "2023-07-19",
+        "phoneNumber": "+48 800-722-492",
+        "task": null,
+        "taskTimestamp": null
+    },
+    {
+        "id": 3,
+        "firstName": "sebastian",
+        "lastName": "bano",
+        "role": "electrician",
+        "hiredSince": "2023-07-19",
+        "phoneNumber": "+48 295-331-498",
+        "task": null,
+        "taskTimestamp": null
+    },
+    {
+        "id": 4,
+        "firstName": "dimitry",
+        "lastName": "petrov",
+        "role": "bricklayer",
+        "hiredSince": "2023-07-19",
+        "phoneNumber": "+48 553-743-100",
+        "task": null,
+        "taskTimestamp": null
+    }
+]
+```
+Employees with id 2, 3, 4 will be returned as a list of employees in HTTP.GET for /employees/**available**  
+Employee id 1 will be returned as a list of employees in HTTP.GET for /employees/**busy**
+Detailed explanation about "task load status" in **Entities** section above.
+
+Additionally, can be filtered by employee role with /employees/roles/{role}
+
+
+### Current_task
+
+```json
+{"currentTask" : "wire outlets on 2nd floor"}
+```
+
+### Task repository/archive
+
+```json
+[
+  {
+    "id": 1,
+    "taskDesc": "wire outlets on 4th floor",
+    "employeeId": 3,
+    "startTimestamp": "2023-07-19T02:50:45.000+00:00",
+    "finishTimestamp": "2023-07-19T02:51:03.000+00:00"
+  },
+  {
+    "id": 2,
+    "taskDesc": "weld the barriers at the entrance",
+    "employeeId": 2,
+    "startTimestamp": "2023-07-19T02:54:34.000+00:00",
+    "finishTimestamp": "2023-07-19T02:58:24.000+00:00"
+  }
+]
+```
+Additionally, can be filtered by employee id with /tasks/repository/{id}
+
+### Single Task from repository/archive
+
+```json
+{
+    "id": 3,
+    "taskDesc": "wire outlets on 4th floor",
+    "employeeId": 3,
+    "startTimestamp": "2023-07-19T02:50:45.000+00:00",
+    "finishTimestamp": "2023-07-19T02:51:02.732+00:00"
+}
+```

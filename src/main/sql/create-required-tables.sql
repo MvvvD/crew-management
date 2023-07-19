@@ -10,7 +10,7 @@ CREATE TABLE `employees` (
   `first_name` varchar(40) DEFAULT NULL,
   `last_name` varchar(40) DEFAULT NULL,
   `role` varchar(40) DEFAULT NULL,
-  `hired_since` date DEFAULT (curdate()),
+  `hired_since` date NOT NULL DEFAULT (curdate()),
   `phone_number` varchar(40) DEFAULT NULL,
   `current_task` varchar(800) DEFAULT NULL,
   `task_timestamp` datetime DEFAULT NULL,
