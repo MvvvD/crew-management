@@ -29,6 +29,7 @@ Data is formatted in JSON. SQL types in bracket for corresponding field in datab
 
 ### employee  
     
+```
 {  
   "id" : "id", (INT)  
   "firstName" : "firstName", (VARCHAR(40))  
@@ -39,23 +40,26 @@ Data is formatted in JSON. SQL types in bracket for corresponding field in datab
   "task" : "currentTask", (VARCHAR(800))  
   "taskTimestamp" : "taskTimestamp", (DATETIME)  
 }
+```
   
 
   Employee **doesn't** have separate a "task load status" field. Available Employee has currentTask set to **null**. This can be achieved using /tasks/{id}/finished endpoint with HTTP PUT method. This endpoint doesn't require body, so it can be used, for example, with a button. Setting task to an empty string **won't** change status to available. **Employee with empty string as a task will be treated as busy.**
 
 
 ### employeegdpr  
-  
+```
 {  
   "id" : "id", (INT)  
   "firstName" : "firstName", (VARCHAR(40))  
   "role" : "role", (VARCHAR(40))  
   "task" : "currentTask", (VARCHAR(800))  
   }
+```
 
 Employeegdpr is employee entity stripped from sensitive data.
 
 ### task
+```
 {  
   "id" : "id", (INT)  
   "taskDesc" : "description", (VARCHAR(800))  
@@ -63,13 +67,16 @@ Employeegdpr is employee entity stripped from sensitive data.
   "taskTimestamp" : "startTimestamp", (DATETIME)  
   "finishTimestamp" : "finishTimestamp", (DATETIME)  
   }  
+```
 
 Employeegdpr and task are **read-only** entities. Task only occur in tasks repository/archive as entry of a list.
 
 ### current_task  
-  {  
-"currentTask" : "taskContent", (VARCHAR(800))  
+ ``` 
+ {  
+  "currentTask" : "taskContent", (VARCHAR(800))  
 }
+```
 
 Current_task is workaround for **updating an employee with new task using request body** that is as small as possible, simplifying said body to single field.
 
