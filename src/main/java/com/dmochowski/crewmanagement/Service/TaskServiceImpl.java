@@ -2,6 +2,7 @@ package com.dmochowski.crewmanagement.Service;
 
 import com.dmochowski.crewmanagement.dao.TaskRepo;
 import com.dmochowski.crewmanagement.entity.ArchivalTask;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    @Transactional
     public ArchivalTask save(ArchivalTask archivalTask) {
         return taskRepo.save(archivalTask);
     }

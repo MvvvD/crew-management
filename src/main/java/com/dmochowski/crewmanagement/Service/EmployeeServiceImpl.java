@@ -3,6 +3,7 @@ package com.dmochowski.crewmanagement.Service;
 import com.dmochowski.crewmanagement.dao.EmployeeRepo;
 import com.dmochowski.crewmanagement.entity.Employee;
 import com.dmochowski.crewmanagement.entity.EmployeeGdpr;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,11 +64,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    @Transactional
     public Employee save(Employee employee) {
         return employeeRepo.save(employee);
     }
 
     @Override
+    @Transactional
+
     public void delete(Employee employee) {
         employeeRepo.delete(employee);
     }
