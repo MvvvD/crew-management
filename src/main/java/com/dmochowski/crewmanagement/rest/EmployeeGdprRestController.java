@@ -1,7 +1,7 @@
 package com.dmochowski.crewmanagement.rest;
 
 
-import com.dmochowski.crewmanagement.Service.EmployeeService;
+import com.dmochowski.crewmanagement.service.EmployeeService;
 import com.dmochowski.crewmanagement.entity.EmployeeGdpr;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

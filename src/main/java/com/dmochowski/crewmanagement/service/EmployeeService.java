@@ -1,4 +1,4 @@
-package com.dmochowski.crewmanagement.Service;
+package com.dmochowski.crewmanagement.service;
 
 import com.dmochowski.crewmanagement.entity.Employee;
 import com.dmochowski.crewmanagement.entity.EmployeeGdpr;

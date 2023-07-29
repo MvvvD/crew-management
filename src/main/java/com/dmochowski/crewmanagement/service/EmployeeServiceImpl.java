@@ -1,4 +1,4 @@
-package com.dmochowski.crewmanagement.Service;
+package com.dmochowski.crewmanagement.service;
 
 import com.dmochowski.crewmanagement.dao.EmployeeRepo;
 import com.dmochowski.crewmanagement.entity.Employee;

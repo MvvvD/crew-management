@@ -1,7 +1,7 @@
 package com.dmochowski.crewmanagement.rest;
 
-import com.dmochowski.crewmanagement.Service.EmployeeService;
-import com.dmochowski.crewmanagement.Service.TaskService;
+import com.dmochowski.crewmanagement.service.EmployeeService;
+import com.dmochowski.crewmanagement.service.TaskService;
 import com.dmochowski.crewmanagement.entity.ArchivalTask;
 import com.dmochowski.crewmanagement.entity.Employee;
 import com.dmochowski.crewmanagement.entity.CurrentTask;
